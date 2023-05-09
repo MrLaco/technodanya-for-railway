@@ -7,6 +7,6 @@ import java.util.*;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    Optional<User> getUserByEmail(String email);
-    Optional<User> getUserById(Integer id);
+    Optional<User> findUserByEmail(String email);
+    Optional<User> findUserById(Integer id);
 }

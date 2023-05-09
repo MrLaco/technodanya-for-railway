@@ -3,26 +3,17 @@ package ru.kpfu.itis.technodanyaspring.model;
 import lombok.*;
 import org.springframework.security.core.*;
 
-import javax.persistence.*;
 
-@Data
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-public class Role implements GrantedAuthority {
+@RequiredArgsConstructor
+public enum Role implements GrantedAuthority {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    ADMIN("ADMIN"),
+    USER("USER");
 
-    private String name;
-
-    public Role(String name) {
-        this.name = name;
-    }
+    private final String value;
 
     @Override
     public String getAuthority() {
-        return name;
+        return value;
     }
 }
