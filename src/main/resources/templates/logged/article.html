@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+<nav class="site-header sticky-top py-1">
+  <div class="container d-flex flex-column flex-md-row justify-content-between">
+    <a class="py-3" href="#">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mx-auto"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+    </a>
+    <a class="py-3 d-none d-md-inline-block" href="/">Главная</a>
+    <a class="scrollto py-3 d-none d-md-inline-block" href="/login">Личный кабинет</a>
+    <a class="scrollto py-3 d-md-inline-block" href="#">
+      <img class = "search-item d-block mx-auto" width="24" src="/images/search-item.png" alt="">
+    </a>
+  </div>
+</nav>
+<!-- Page content-->
+<div class="container mt-5" th:object="${createArticleResponseDto}">
+  <div class="row">
+    <div class="col-lg-8">
+      <!-- Post content-->
+      <article>
+        <!-- Post header-->
+        <header class="mb-4">
+          <!-- Post title-->
+          <h1 class="fw-bolder mb-1" th:text="${createArticleResponseDto.title}"></h1>
+          <!-- Post meta content-->
+          <div class="text-muted fst-italic mb-2">
+            <span>
+              Опубликовано <span th:text="${createArticleResponseDto.getDate()}"></span>
+              пользователем <span th:text="${createArticleResponseDto.getUser().getEmail()}"></span>
+            </span>
+          </div>
+        </header>
+        <!-- Preview image figure-->
+        <figure class="mb-4">
+          <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="https://img2.akspic.ru/crops/7/1/1/6/6/166117/166117-apple_event_california_streaming_14_sept_2021_official_wallpaper_desktop-1920x1080.jpg" class="d-block w-100" alt="...">
+              </div>
+
+              <div class="carousel-item" th:each="image : ${createArticleResponseDto.getImages()}">
+                <img th:src="${image}" class="d-block w-100" alt="..." src="">
+              </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+    </div>
+    </figure>
+    <!-- Post content-->
+    <section class="mb-5">
+      <p class="fs-5 mb-4" th:text="${createArticleResponseDto.getContent()}"></p>
+    </section>
+    </article>
+  </div>
+  <!-- Side widgets-->
+  <div class="col-lg-4">
+    <!-- Categories widget-->
+    <div class="card mb-4 mt-auto">
+      <div class="card-header">Прочие статьи</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul class="list-unstyled mb-0">
+              <li><a href="#!">#iPhone 14</a></li>
+              <li><a href="#!">#AirPods Pro</a></li>
+              <li><a href="#!">#iOS 16</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <ul class="list-unstyled mb-0">
+              <li><a href="#!">#...</a></li>
+              <li><a href="#!">#...</a></li>
+              <li><a href="#!">#...</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Side widget-->
+    <div class="card mb-4">
+      <div class="card-header">От автора</div>
+      <div class="card-body" th:text="${createArticleResponseDto.getDescription()}"></div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Footer-->
+<footer class="py-5 bg-dark">
+  <div class="container"><p class="m-0 text-center text-white">TechnoDanya &copy; 2023</p></div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

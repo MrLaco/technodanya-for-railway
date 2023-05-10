@@ -20,7 +20,7 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                    .antMatchers("/profile", "/about_premium").authenticated()
+                    .antMatchers("/profile", "/about_premium", "/create_article").authenticated()
                     .antMatchers("/login").anonymous()
                     .anyRequest().permitAll().and()
                 .formLogin()

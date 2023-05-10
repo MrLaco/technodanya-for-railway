@@ -11,7 +11,6 @@ import ru.kpfu.itis.technodanyaspring.dto.mapper.*;
 import ru.kpfu.itis.technodanyaspring.exception.*;
 import ru.kpfu.itis.technodanyaspring.service.*;
 
-import javax.servlet.http.*;
 import java.util.*;
 
 @Controller
@@ -22,7 +21,7 @@ public class ProfileController {
     private final PremiumService premiumService;
 
     @GetMapping("/profile")
-    public String profile(Model model) throws UserNotFoundException, PremiumNotFoundException {
+    public String profile(Model model) throws UserNotFoundException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
