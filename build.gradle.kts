@@ -31,10 +31,15 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.24")
     annotationProcessor("org.projectlombok:lombok:1.18.24")
 
+    // websockets
+    implementation("org.springframework.boot:spring-boot-starter-websocket")
+
     //webjars
     implementation ("org.webjars:jquery:3.6.0")
     implementation ("org.webjars:bootstrap:4.6.0")
     implementation ("org.webjars:webjars-locator-core:0.46")
+    implementation("org.webjars:stomp-websocket:2.3.4")
+    implementation("org.webjars:sockjs-client:1.5.1")
 
     //mapstruct
     implementation("org.mapstruct:mapstruct:1.5.5.Final")

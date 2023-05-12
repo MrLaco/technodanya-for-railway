@@ -21,7 +21,7 @@ public class ArticleController {
 
         Integer articleID = id.orElseThrow(() -> new IncorrectArticleIdParamException("ID статьи в запросе пустой!"));
 
-        CreateArticleResponseDto createArticleResponseDto = articleService.findArticleById(articleID).orElseThrow(() -> new ArticleNotFoundException("Статья с id " + id + "не найдена!"));
+        CreateArticleResponseDto createArticleResponseDto = articleService.getArticleById(articleID).orElseThrow(() -> new ArticleNotFoundException("Статья с id " + id + "не найдена!"));
         model.addAttribute(createArticleResponseDto);
 
         return "logged/article";

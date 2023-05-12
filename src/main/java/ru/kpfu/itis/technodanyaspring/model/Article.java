@@ -26,8 +26,11 @@ public class Article {
     private String content;
 
     // чтоб доставать ссылку на картинки
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Image> images;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Review> reviews;
 
     @Column(nullable = false)
     private String date;
@@ -35,4 +38,16 @@ public class Article {
     // чтоб доставать отсюда email юзера
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", content='" + content + '\'' +
+                ", date='" + date + '\'' +
+                ", user=" + (user != null ? user.getEmail() : null) +
+                '}';
+    }
 }

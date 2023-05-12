@@ -1,12 +1,20 @@
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <title>TechnoDanya | Профиль</title>
+  <title>TechnoDanya | Статьи</title>
+
   <link href="/css/bootstrap.min.css" rel="stylesheet">
   <link href="/css/product.css" rel="stylesheet">
-</head>
 
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+    $(document).on("click", "#ajax-button", function () {
+              $("#ajax-div").text("Опубликовано");
+            }
+    )
+  </script>
+</head>
 <body>
 <nav class="site-header sticky-top py-1">
   <div class="container d-flex flex-column flex-md-row justify-content-between">
@@ -14,6 +22,7 @@
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mx-auto"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
     </a>
     <a class="py-3 d-none d-md-inline-block" href="/">Главная</a>
+    <a class="py-3 d-none d-md-inline-block" href="/profile">Личный кабинет</a>
     <a class="scrollto py-3 d-md-inline-block" href="#">
       <img class = "search-item d-block mx-auto" width="24" src="/images/search-item.png" alt="">
     </a>
@@ -21,32 +30,39 @@
 </nav>
 
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-  <div class="col-md-5 p-lg-5 mx-auto my-5">
-    <h1 class="display-4 font-weight-normal">Личный кабинет</h1>
+  <div class="col-md-5 p-lg-5 mx-auto my-5" th:object="${article}">
+    <h1 class="display-4 font-weight-normal">Редактирование статьи</h1>
     <br>
-    <a class="btn btn-outline-secondary" href="/my_articles">Мои статьи</a>
-    <a class="btn btn-outline-secondary" href="/create_article">Создать статью</a>
-    <a class="btn btn-outline-secondary" href="/articles">Все статьи</a>
-    <a class="btn btn-outline-secondary" href="/logout">Выйти</a>
-    <a class="btn btn-outline-secondary" href="/reviews">Отзывы</a>
-    <a class="btn btn-outline-secondary" href="/chat">Чат</a>
-  </div>
+    <form class="form-create-article" method="post" th:action="@{edit_article}">
 
-  <div class="h5" th:object="${userResponseDto}">
-    Имя: <span th:text="${userResponseDto.getFirstName()}"></span>
-    <br>
-    Фамилия: <span th:text="${userResponseDto.getLastName()}"></span>
-    <br>
-    Email: <span th:text="${userResponseDto.getEmail()}"></span>
-    <br>
-    Город: <span th:text="${userResponseDto.getCity()}"></span>
-    <br>
-    Подписка: <span th:text="${td_premium}"></span>
-    <br>
-    <a href="/about_premium">Подробнее о подписке</a>
-  </div>
+      <label for="inputEmail" class="sr-only">Название статьи</label>
+      <input type="text" id="inputEmail" class="form-control" placeholder="Название статьи" name="title" th:value="${article.getTitle()}" th:field="*{title}" required autofocus>
 
-  <img class="" style="max-width: 30%; max-height: 30%; " src="https://phonoteka.org/uploads/posts/2021-06/1624917091_21-phonoteka_org-p-klassnie-oboi-dlya-muzhchin-krasivo-22.jpg" alt="">
+      <br>
+
+      <label for="inputEmail" class="sr-only">Текст статьи</label>
+      <input type="text" id="inputEmail" class="form-control" placeholder="Текст статьи" name="content" th:value="${article.getContent()}" th:field="*{content}" required autofocus>
+
+      <br>
+
+      <label for="inputEmail" class="sr-only">Ссылки на фото</label>
+      <input type="text" id="inputEmail" class="form-control" placeholder="Ссылки на фото (через , без пробелов)" name="images_links" th:value="${links}" th:field="*{images}" required autofocus>
+
+      <br>
+
+      <label for="inputEmail" class="sr-only">Текст "от автора"</label>
+      <input type="text" id="inputEmail" class="form-control" placeholder="Текст 'от автора'" name="description" th:value="${article.getDescription()}" th:field="*{description}" required autofocus>
+
+      <br>
+      <br>
+
+      <button class="btn btn-lg btn-dark btn-block" id="ajax-button" type="submit">Сохранить</button>
+      <br>
+      <div id="ajax-div"></div>
+
+      <p class="mt-5 mb-3 text-muted">&copy; 2023 TechnoDanya</p>
+    </form>
+  </div>
 
   <div class="box-shadow d-none d-md-block"></div>
   <div class="box-shadow d-none d-md-block"></div>
@@ -76,5 +92,4 @@
   });
 </script>
 </body>
-
 </html>

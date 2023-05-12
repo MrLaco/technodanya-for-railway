@@ -24,4 +24,6 @@ public class Review {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Article article;
 }
