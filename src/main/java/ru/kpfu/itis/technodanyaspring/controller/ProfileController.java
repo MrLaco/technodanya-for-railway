@@ -10,6 +10,7 @@ import ru.kpfu.itis.technodanyaspring.dto.*;
 import ru.kpfu.itis.technodanyaspring.dto.mapper.*;
 import ru.kpfu.itis.technodanyaspring.exception.*;
 import ru.kpfu.itis.technodanyaspring.service.*;
+import ru.kpfu.itis.technodanyaspring.util.*;
 
 import java.util.*;
 
@@ -35,6 +36,12 @@ public class ProfileController {
 
         model.addAttribute(userResponseDto);
         model.addAttribute("td_premium", premiumStatus);
+
+        String iphone14proCost = "от " + Math.round(DollarRateFetcher.fetchDollarRate() * 999) + " рублей";
+        model.addAttribute("iphone14proCost", iphone14proCost);
+
+        String macbookPro13Cost = "от " + Math.round(DollarRateFetcher.fetchDollarRate() * 1299) + " рублей";
+        model.addAttribute("macbookPro13Cost", macbookPro13Cost);
 
         return "logged/profile";
     }

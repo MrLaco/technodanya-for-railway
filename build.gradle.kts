@@ -21,6 +21,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-mail")
+
+    implementation("io.springfox:springfox-boot-starter:3.0.0")
+
     testImplementation("org.projectlombok:lombok:1.18.22")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
@@ -44,6 +47,12 @@ dependencies {
     //mapstruct
     implementation("org.mapstruct:mapstruct:1.5.5.Final")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
+
+    //okhttp
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+
+    //json
+    implementation("org.json:json:20230227")
 }
 
 tasks.withType<Test> {

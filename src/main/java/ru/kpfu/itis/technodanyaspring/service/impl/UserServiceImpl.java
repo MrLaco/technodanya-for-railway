@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.*;
 import org.springframework.stereotype.*;
 import ru.kpfu.itis.technodanyaspring.dto.*;
 import ru.kpfu.itis.technodanyaspring.dto.mapper.*;
+import ru.kpfu.itis.technodanyaspring.exception.*;
 import ru.kpfu.itis.technodanyaspring.model.*;
 import ru.kpfu.itis.technodanyaspring.repository.*;
 import ru.kpfu.itis.technodanyaspring.service.*;
@@ -61,5 +62,37 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return UserMapper.INSTANCE.userToUserResponseDto(user);
+    }
+
+    @Override
+    public boolean delete(Integer id) {
+        userRepository.deleteById(id);
+
+        return userRepository.findUserById(id).isEmpty();
+    }
+
+    @Override
+    public UserResponseDto update(Integer id, CreateUserRequestDto createUserRequestDto) throws UserNotFoundException {
+        User entityToSave = userRepository.findUserById(id)
+                .orElseThrow(() -> new UserNotFoundException("Статья с id " + id + " не найдена!"));
+
+        if (createUserRequestDto.getFirstName() != null) {
+            entityToSave.setFirstName(createUserRequestDto.getFirstName());
+        }
+        if (createUserRequestDto.getLastName() != null) {
+            entityToSave.setFirstName(createUserRequestDto.getLastName());
+        }
+        if (createUserRequestDto.getEmail() != null) {
+            entityToSave.setFirstName(createUserRequestDto.getEmail());
+        }
+        if (createUserRequestDto.getCity() != null) {
+            entityToSave.setFirstName(createUserRequestDto.getCity());
+        }
+        if (createUserRequestDto.getPassword() != null) {
+            entityToSave.setFirstName(createUserRequestDto.getPassword());
+        }
+        userRepository.save(entityToSave);
+
+        return UserMapper.INSTANCE.userToUserResponseDto(entityToSave);
     }
 }
