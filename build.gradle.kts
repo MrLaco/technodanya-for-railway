@@ -1,7 +1,6 @@
 plugins {
     id("java")
     id("org.springframework.boot") version "2.7.8"
-    application
 }
 
 apply(plugin = "io.spring.dependency-management")
@@ -10,9 +9,6 @@ group = "ru.kpfu.itis"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
-application {
-    mainClass.set("ru.kpfu.itis.technodanyaspring.Application")
-}
 
 repositories {
     mavenCentral()
@@ -60,12 +56,9 @@ dependencies {
     implementation("org.json:json:20230227")
 }
 
-tasks.withType<Jar>() {
+tasks.withType<Jar> {
     manifest {
         attributes["Main-Class"] = "ru.kpfu.itis.technodanyaspring.Application"
-    }
-    configurations["compileClasspath"].forEach { file: File ->
-        from(zipTree(file.absoluteFile))
     }
 }
 
