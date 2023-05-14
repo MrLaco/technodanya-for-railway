@@ -60,6 +60,16 @@ dependencies {
     implementation("org.json:json:20230227")
 }
 
+tasks {
+    withType<Jar> {
+        manifest {
+            attributes["Main-Class"] = application.mainClass
+        }
+        // here zip stuff found in runtimeClasspath:
+        from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+    }
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }
