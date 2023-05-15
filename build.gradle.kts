@@ -56,7 +56,8 @@ dependencies {
     implementation("org.json:json:20230227")
 }
 
-tasks.withType<Jar> {
+tasks.jar {
+    enabled = false
     manifest {
         attributes["Main-Class"] = "ru.kpfu.itis.technodanyaspring.Application"
     }
