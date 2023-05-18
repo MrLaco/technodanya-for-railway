@@ -1,0 +1,1 @@
+DELETE localhost:8081/api/user/delete/1 HTTP/1.1

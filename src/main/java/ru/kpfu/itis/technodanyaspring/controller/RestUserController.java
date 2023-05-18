@@ -11,7 +11,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/user")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class RestUserController {
 
     private final UserService userService;
@@ -19,11 +19,11 @@ public class RestUserController {
     // CREATE
     @PostMapping("/create")
     public ResponseEntity<UserResponseDto> createUser(
-            @RequestBody CreateUserRequestDto request
+            @RequestBody CreateUserRequestDto createUserRequestDto
     ) {
-        UserResponseDto response = userService.create(request);
+        UserResponseDto userResponseDto = userService.create(createUserRequestDto);
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userResponseDto);
     }
 
     // READ

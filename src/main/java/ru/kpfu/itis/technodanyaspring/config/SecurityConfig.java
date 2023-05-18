@@ -21,7 +21,7 @@ public class SecurityConfig {
         httpSecurity
                 .authorizeRequests()
                     .antMatchers("/webjars/**", "/static/**").permitAll()
-                    .antMatchers("/api/user/").permitAll()
+                    .antMatchers("/api/user/**").permitAll()
                     .antMatchers("/profile", "/about_premium", "/create_article", "/my_articles", "/articles", "/chat", "/reviews").authenticated()
                     .antMatchers("/login").anonymous()
                     .anyRequest().permitAll().and()
